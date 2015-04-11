@@ -29,9 +29,4 @@ abs(Matrix<D, Rows, Cols> const& m) {
 
 }
 
-
-
-
-
-
 #endif // ODEINT_EIGEN_INTEGRATION_HPP

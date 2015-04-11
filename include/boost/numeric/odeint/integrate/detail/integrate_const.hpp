@@ -100,9 +100,9 @@ size_t integrate_const(
 
 template< class Stepper , class System , class State , class Time , class Observer >
 size_t integrate_const(
-        Stepper stepper , System system , State &start_state ,
+        Stepper stepper , System & system , State &start_state ,
         Time start_time , Time end_time , Time dt ,
-        Observer observer , dense_output_stepper_tag 
+        Observer & observer , dense_output_stepper_tag
 )
 {
     typename odeint::unwrap_reference< Observer >::type &obs = observer;

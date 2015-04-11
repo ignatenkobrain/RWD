@@ -2,7 +2,6 @@
 #define INTEGRATE_HPP
 #include <stddef.h>
 #include <eigen3/Eigen/Dense>
-#include <boost/numeric/odeint/external/eigen/eigen_algebra.hpp>
 #include <boost/numeric/odeint/stepper/runge_kutta_dopri5.hpp>
 #include <boost/numeric/odeint/algebra/vector_space_algebra.hpp>
 #include <boost/numeric/odeint.hpp>
@@ -11,7 +10,8 @@
 #include <include/RWDFramework/config.h>
 
 namespace RWDFramework {
-using state_t = Eigen::Matrix<double, 2, 1>;
+
+typedef boost::numeric::ublas::vector<double> state_t;
 
 struct Methods {
 
@@ -26,7 +26,7 @@ void integrate(System & system,state_t & startState,
                size_t method = Methods::RK_4) {
 
     double minStep = (endTime-startTime)/maxPoints;
-
+    //(observer)(startState,0.0);
 
     if(method == Methods::RK_4) {
         using namespace boost::numeric::odeint;
@@ -42,7 +42,7 @@ void integrate(System & system,state_t & startState,
 
 }
 
-}
+} // namespace RWDFramework
 
 
 

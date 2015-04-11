@@ -1,0 +1,44 @@
+#ifndef INTEGRABLEFACTORY_H
+#define INTEGRABLEFACTORY_H
+#include <string>
+#include <include/RWDFramework/integrable.h>
+
+namespace RWDFramework {
+class ModelFactory {
+
+private:
+    template<typename Object>
+    Object * getObject(const std::string &pathToObserver, const std::string & interfaceName) {
+        void *handle;
+        T * (*getT)();
+        char *error;
+        handle = dlopen (pathToModel.c_str(), RTLD_LAZY );
+        if (!handle) {
+            fputs (dlerror(), stderr);
+            exit(1);
+        }
+        std::string factoryName = "create";
+        factoryName.append(interfaceName);
+        getObj = (Object * (*)())dlsym(handle, factoryName);
+        if ((error = dlerror()) != NULL)  {
+            fprintf (stderr, "%s\n", error);
+            exit(1);
+        }
+        Object obj = getObject();
+        dlclose(handle);
+        return obj;
+    }
+
+public:
+
+    Integrable * getModel(const std::string & pathToModel);
+    
+    Observer * getObserver(const std::string &pathToObserver);
+    
+
+};
+} // namespace RWDFramework
+
+
+
+#endif // INTEGRABLEFACTORY_H
