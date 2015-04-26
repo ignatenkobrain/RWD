@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name = "Harmonic Oscillator" lib = "plugins/HarmonicOscillator/libOscPlugin.so">
+  <parameters>
+    <w_0>4</w_0>
+    <C_y>2000</C_y>
+  </parameters>
+  <startState>
+    <x_1>0.2</x_1>
+    <x_2>0</x_2>
+  </startState>
+  <method>
+    <name>CASH_KARP</name>
+    <startTime>0</startTime>
+    <endTime>10</endTime>
+    <absError>1.0e-10</absError>
+    <relError>1.0e-6</relError>
+  </method>
+  <observer type = "memory_storing">
+    <trackTime>true</trackTime>
+    <trackingVars>all</trackingVars>
+  </observer>
+</model>

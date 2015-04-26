@@ -8,6 +8,10 @@ namespace RWDFramework {
 class ModelFactory {
 
 private:
+
+    //
+    // TODO: Additional interface for system of 2nd order ODE will be added later.
+    //
     template<typename Object>
     Object * getObject(const std::string &pathToObjectLib, const std::string & interfaceName) {
         void *handle;
@@ -16,6 +20,7 @@ private:
         handle = dlopen (pathToObjectLib.c_str(), RTLD_LAZY );
         if (!handle) {
             fputs (dlerror(), stderr);
+            fputs("\n", stderr);
             exit(1);
         }
         std::string factoryName = "create";
@@ -35,11 +40,6 @@ public:
     Integrable * getModel(const std::string & pathToModelLib) {
         return getObject<Integrable>(pathToModelLib,"Integrable");
     }
-
-    Observer * getObserver(const std::string &pathToObserverLib) {
-        return getObject<Observer>(pathToObserverLib,"Observer");
-    }
-
 
 };
 } // namespace RWDFramework
